@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Event Storming mark: a tilted sticky note struck by an event bolt. -->
+  <g transform="rotate(-6 16 16)">
+    <rect x="4.5" y="4.5" width="23" height="23" rx="3.5" fill="#ffa94d"/>
+    <!-- folded corner -->
+    <path d="M27.5 20.5 v3.5 a3.5 3.5 0 0 1 -3.5 3.5 h-3.5 z" fill="#e08a2e"/>
+    <!-- the bolt -->
+    <path d="M18.6 7.5 L10.8 17.6 h4.1 l-2.1 7.2 8.4-10.9 h-4.2 z" fill="#03213b"/>
+  </g>
+</svg>
