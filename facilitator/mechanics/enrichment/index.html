@@ -83,8 +83,14 @@ of the storm. Enrichment writes are facilitator-only by design: the room dictate
 type.</p>
 <figure class="media-asset"><img src="/solace-event-storming-docs/_astro/facilitator-enrichment-01-side-panel.Ch_rjW0N.png" alt="The enrichment side panel with a topic path and its resolved preview." loading="lazy"><figcaption>The enrichment side panel with a topic path and its resolved preview.</figcaption></figure><script type="module">(()=>{const i=window;if(i.__mediaLightbox)return;i.__mediaLightbox=!0;const e=document.createElement("div");e.className="media-lightbox",e.hidden=!0,e.innerHTML='<button class="media-lightbox__close" aria-label="Close">&times;</button><img alt="" />';const d=e.querySelector("img"),c=()=>document.body.appendChild(e);document.readyState==="loading"?document.addEventListener("DOMContentLoaded",c):c();const s=()=>{e.hidden=!0,d.removeAttribute("src"),document.documentElement.style.overflow=""},r=(t,n)=>{d.src=t,d.alt=n,e.hidden=!1,document.documentElement.style.overflow="hidden"};document.addEventListener("click",t=>{const n=t.target;if(!n)return;const o=n.closest(".media-asset img");if(o){r(o.currentSrc||o.src,o.alt);return}n.closest(".media-lightbox")&&s()}),document.addEventListener("keydown",t=>{t.key==="Escape"&&!e.hidden&&s()})})();</script>
 <div class="sl-heading-wrapper level-h2"><h2 id="the-fields">The fields</h2><a class="sl-anchor-link" href="#the-fields"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “The fields”</span></a></div>
-<p>Select an event and the enrichment section opens in the side panel. All fields are
-optional by contract; no export requires them.</p>
+<p>Select an event and the enrichment section opens in the side panel. Above it, a
+<strong>Parties</strong> block shows the event as a contract: who produces it (its system), what
+causes it (the incoming command), and who consumes it (its policies and read models) -
+derived live from the links the room accepted, which is exactly the publish/subscribe
+wiring the Event Portal export will carry. An amber <em>“nobody consumes this event yet”</em>
+is worth a conversation before you spend effort enriching. Party names are clickable
+and select that sticky. All enrichment fields are optional by contract; no export
+requires them.</p>
 <ul>
 <li><strong>Relative topic path</strong>, for example <code dir="auto">booking/confirmed/v1/{bookingId}</code>, with a live
 resolved preview under the model root.</li>
