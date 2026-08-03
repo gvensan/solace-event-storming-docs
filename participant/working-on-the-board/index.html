@@ -124,6 +124,10 @@ larger rooms.</p>
 <p>Links carry causality - command causes event, event triggers policy, policy issues
 the next command - and there are two ways to draw one:</p>
 <ul>
+<li><strong>Live preview:</strong> while you are connecting, a dashed animated line follows your cursor
+from the source sticky. Point at a candidate and it answers before you click: green
+means the link will be created, amber means the arrow will flip the legal way round,
+and red explains why that pair cannot link - so a refusal never comes as a surprise.</li>
 <li><strong>Alt-click:</strong> click the first sticky (the source), then alt-click (⌥-click on
 Mac) the target.</li>
 <li><strong>The ⤳ button:</strong> select the source sticky and press the arrow button on its
@@ -139,11 +143,8 @@ systems are never wired - they are assigned (see
 <p>You can switch between views whenever you like. Switching a view changes only what
 <em>you</em> see; it does not move anything for anyone else. The available views:</p>
 <ul>
-<li><strong>Raw</strong> is where you land (the default view): the storm wall, stickies at their
-original birth positions. You can create, edit, and vote here, but there are no links
-and no rearranging. It is the wall as it was born.</li>
-<li><strong>Plain</strong> is the working wall: everything works, including moving stickies and
-drawing links.</li>
+<li><strong>Plain</strong> is where you land and the working wall: everything works, including moving
+stickies and drawing links.</li>
 <li><strong>Lane views</strong> (actor, system, and context) arrange the same wall into lanes. Actor
 and system lanes are led by the cast sticky that names them, pivotal events form a
 spine across the top, and hotspots gather in a parking lot along the bottom. Stickies
@@ -160,14 +161,18 @@ members list stay available throughout.</p>
 and dim the rest; click it again to clear. While a spotlight is on you are inspecting,
 not editing (double-clicking the wall still creates a new sticky of that kind).</li>
 <li><strong>Cast threads (⚙⇝):</strong> toggle to show which actor issues each command and which system
-emits each event. Select a sticky to highlight its threads and dim the rest.</li>
+emits each event. Select a sticky to highlight its threads and dim the rest. Hovering a
+thread or a flow link names the relationship in a tooltip; clicking one opens a small
+card with the details of both connected stickies. The card follows your mouse’s
+attention: it stays while you are on the line or the card itself, and slips away shortly
+after you leave (or on Esc, or a click elsewhere).</li>
 <li><strong>Origin (◷ origin):</strong> see every sticky where it was first placed, straight from the
 board’s history, then switch back to the view you came from. It is a look back rather
 than a working wall: you cannot drag stickies or draw links there. Note that it shows
 every sticky at its own birthplace at once, which is not how the wall looked at any one
 moment - for that, use playback.</li>
-<li><strong>Timeline (◷ timeline, inside the origin lens):</strong> arrange the stickies left to right in
-the order they were created, then toggle back to their original placements.</li>
+<li><strong>Timeline (⧗, appears beside ◷ while the lens is on):</strong> arrange the stickies left to
+right in the order they were created, then toggle back to their original placements.</li>
 </ul>
 <div class="sl-heading-wrapper level-h2"><h2 id="chatting-and-glossary">Chatting and glossary</h2><a class="sl-anchor-link" href="#chatting-and-glossary"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “Chatting and glossary”</span></a></div>
 <p>Chat and voice notes are always open - see
