@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cheatsheets - Event Storming Workshop Tool</title>
+<meta name="description" content="The printable one-pagers: participant primer, facilitator field card, the wall-to-Event-Portal translation map, and the handoff kit." />
+<style>
+  :root {
+    --evt: #ffa94d; --cmd: #8ec5ff; --act: #ffe066; --hot: #ff6b6b; --read: #9be09b;
+    --ink: #23201a; --ink-soft: #5c554a; --wall: #f4ead8; --accent: #0a7d5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--wall); color: var(--ink); line-height: 1.5; font-size: 15px; }
+  .page { max-width: 760px; margin: 0 auto; padding: 34px 26px 40px; }
+  header { border-bottom: 3px solid var(--ink); padding-bottom: 10px; }
+  h1 { font-size: 26px; letter-spacing: -0.3px; }
+  header p { margin-top: 6px; color: var(--ink-soft); font-size: 14.5px; }
+  .cards { margin-top: 20px; display: grid; gap: 12px; }
+  a.card { display: block; text-decoration: none; color: var(--ink); border: 2px solid var(--ink); border-radius: 5px; background: #fff; padding: 14px 16px; transition: transform 0.08s ease, box-shadow 0.08s ease; }
+  a.card:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 rgba(35,32,26,0.3); }
+  .card .who { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; padding: 1px 8px; border-radius: 3px; margin-bottom: 5px; }
+  .card .name { display: block; font-size: 17px; font-weight: 700; }
+  .card .what { font-size: 13.5px; color: var(--ink-soft); margin-top: 3px; }
+  .docs-link { margin-top: 22px; font-size: 14px; }
+  .docs-link a { color: var(--accent); font-weight: 700; }
+  footer { margin-top: 26px; border-top: 2px solid var(--ink); padding-top: 9px; font-size: 12.5px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Cheatsheets</h1>
+    <p>Four printable one-pagers, each aimed at a moment in the workshop's life.
+       Every sheet prints to a single A4 page - use your browser's print dialog.</p>
+  </header>
+
+  <div class="cards">
+    <a class="card" href="cheatsheet.html">
+      <span class="who" style="background: var(--evt)">Participants · before the session</span>
+      <span class="name">Event Storming, before you walk in</span>
+      <span class="what">The one rule, the sticky vocabulary, how they connect, and the rules of the room. Five minutes, no preparation possible.</span>
+    </a>
+    <a class="card" href="facilitator-card.html">
+      <span class="who" style="background: var(--act)">Facilitators · during the session</span>
+      <span class="name">Facilitator field card</span>
+      <span class="what">Per-phase exit cues and timeboxes, the storm's wave sequence, standing moves, and the acts that deserve their confirm.</span>
+    </a>
+    <a class="card" href="epmap.html">
+      <span class="who" style="background: var(--cmd)">Architects · at the handoff</span>
+      <span class="name">From the wall to Event Portal</span>
+      <span class="what">What every wall element becomes in the EP import file - and what deliberately stays workshop-side.</span>
+    </a>
+    <a class="card" href="handoff.html">
+      <span class="who" style="background: var(--read)">The receiving team · after the session</span>
+      <span class="name">After the workshop: your handoff kit</span>
+      <span class="what">The four artifacts a finished session produces, what each is for, and the first three things to do with them.</span>
+    </a>
+  </div>
+
+  <p class="docs-link">Looking for the full documentation? <a href="./">Start at the docs home</a>.</p>
+
+  <footer>Event Storming Workshop Tool</footer>
+
+</div>
+</body>
+</html>

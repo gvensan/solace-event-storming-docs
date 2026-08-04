@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>After the workshop - your handoff kit</title>
+<meta name="description" content="The four artifacts a finished Event Storming session produces, what each is for, and the first three things to do with them." />
+<style>
+  :root {
+    --evt: #ffa94d; --read: #9be09b; --cmd: #8ec5ff; --hot: #ff6b6b;
+    --ink: #23201a; --ink-soft: #5c554a; --wall: #f4ead8; --accent: #0a7d5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--wall); color: var(--ink); line-height: 1.45; font-size: 15px; }
+  .page { max-width: 900px; margin: 0 auto; padding: 26px 26px 30px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; border-bottom: 3px solid var(--ink); padding-bottom: 9px; }
+  h1 { font-size: 25px; letter-spacing: -0.3px; }
+  header .tag { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 2px; }
+  .intro { margin-top: 10px; font-size: 15px; }
+  .intro strong { color: var(--accent); }
+  h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 2.5px; margin: 20px 0 9px; color: var(--ink-soft); }
+
+  .kit { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .art { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 10px 12px; }
+  .art .ext { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; padding: 1px 7px; border-radius: 3px; margin-bottom: 4px; }
+  .art .name { display: block; font-weight: 700; font-size: 14.5px; }
+  .art .for { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.35; }
+  .art .for b { color: var(--ink); font-weight: 700; }
+
+  ol.first { counter-reset: n; list-style: none; }
+  ol.first li { counter-increment: n; position: relative; padding: 9px 12px 9px 44px; border: 2px solid var(--ink); border-radius: 4px; background: #fff; margin-bottom: 8px; font-size: 14px; }
+  ol.first li::before { content: counter(n); position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--wall); font-weight: 800; font-size: 12px; text-align: center; line-height: 22px; }
+  ol.first b { font-weight: 700; }
+
+  .fine { border: 2px dashed var(--ink); border-radius: 4px; padding: 9px 13px; }
+  .fine p { font-size: 12.5px; margin: 2px 0; color: var(--ink-soft); }
+  .fine b { color: var(--ink); font-weight: 700; }
+
+  footer { margin-top: 16px; border-top: 3px solid var(--ink); padding-top: 9px; }
+  footer p { font-size: 13px; }
+
+  @media (max-width: 700px) { .kit { grid-template-columns: 1fr; } }
+  @media print {
+    body { font-size: 10.5px; line-height: 1.3; }
+    /* Full-bleed: @page margin 0 + equal inner padding, so the wall colour
+       reaches every edge (Chrome never paints the canvas into @page margins).
+       Content sits exactly where the old margin put it. */
+    html, body { background: var(--wall); }
+    .page { max-width: none; padding: 9mm; }
+    h1 { font-size: 18px; }
+    .intro { margin-top: 6px; font-size: 10.5px; }
+    h2 { margin: 9px 0 5px; font-size: 10px; }
+    .kit { gap: 7px; }
+    .art { padding: 6px 9px; }
+    .art .name { font-size: 11px; }
+    .art .for { font-size: 9.5px; }
+    ol.first li { padding: 5px 10px 5px 36px; margin-bottom: 5px; font-size: 10px; }
+    ol.first li::before { width: 17px; height: 17px; line-height: 17px; font-size: 10px; left: 9px; }
+    .fine { padding: 5px 10px; }
+    .fine p { font-size: 9.5px; }
+    footer { margin-top: 8px; padding-top: 6px; }
+    footer p { font-size: 9.5px; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+  .pdfbtn { position: fixed; top: 14px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .pdfbtn:hover { background: var(--evt); }
+  @media print { .pdfbtn { display: none; } }
+</style>
+</head>
+<body>
+<button class="pdfbtn" onclick="window.print()" title="opens your browser's print dialog - choose 'Save as PDF' as the destination">⬇ Save as PDF</button>
+<div class="page">
+
+  <header>
+    <h1>After the workshop: your handoff kit</h1>
+    <span class="tag">for the team that carries the model forward</span>
+  </header>
+
+  <p class="intro">
+    A finished session produces <strong>four artifacts</strong>. Together they are
+    the whole workshop - the model, the decisions, and the ability to pick the
+    session back up. This sheet says what each one is for and what to do first.
+  </p>
+
+  <h2>The four artifacts</h2>
+  <div class="kit">
+    <div class="art">
+      <span class="ext" style="background: var(--read)">.XLSX</span>
+      <span class="name">The workbook</span>
+      <p class="for">Everything as a spreadsheet: events with topics/QoS/owners, contexts,
+      the build plan, the glossary, and <b>Hotspots &amp; Decisions</b> - the
+      questions the room parked, resolved or still open. The sheet most people
+      will actually read.</p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--cmd)">.JSON</span>
+      <span class="name">The Event Portal import file</span>
+      <p class="for">Domains, applications, events, schemas, topic addresses and
+      pub/sub relations - <b>imported through EP's own UI</b>, everything arriving
+      as DRAFT for your governance to review. The translation dictionary is the
+      companion "wall to Event Portal" sheet.</p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--evt)">.SVG</span>
+      <span class="name">The architecture diagram</span>
+      <p class="for">The applications-and-events graph as a picture - arrows into an
+      event mean "publishes", arrows into an application mean "consumes". For
+      slide decks and corridor conversations.</p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--hot); color:#fff">.BOARD.JSON</span>
+      <span class="name">The board file</span>
+      <p class="for">The session itself - every sticky, link, vote and decision with
+      full history. <b>Import it into any instance of the tool</b> to resume,
+      extend, or replay the workshop exactly as it happened.</p>
+    </div>
+  </div>
+
+  <h2>First three things to do</h2>
+  <ol class="first">
+    <li><b>Import the .json into Event Portal</b> (Designer → import), then walk the DRAFT
+      objects against the translation sheet. Promote what survives review; the workshop
+      proposes, your governance disposes.</li>
+    <li><b>Work the decision backlog.</b> Open the workbook's Hotspots &amp; Decisions sheet:
+      every open hotspot has an owner - hold them to it. Resolved ones carry the room's
+      recorded decision; treat those as agreements, not suggestions.</li>
+    <li><b>Keep the board file somewhere safe.</b> It is the only artifact that can
+      resurrect the session - schedule the follow-up storm from it rather than starting
+      a fresh wall.</li>
+  </ol>
+
+  <h2>Fine print worth knowing</h2>
+  <div class="fine">
+    <p><b>"Schema TBD"</b> on an event means the room deliberately skipped the payload - a follow-up, not an error.</p>
+    <p><b>QoS and owning team</b> arrive inside event descriptions - EP has no first-class fields for them yet.</p>
+    <p><b>Nothing was inferred from layout.</b> Every pub/sub relation traces to a link or attribute the room explicitly accepted.</p>
+  </div>
+
+  <footer>
+    <p>
+      Questions about any element's origin? The board file replays the entire
+      session - every object in the export can be traced to the moment the room
+      created it.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

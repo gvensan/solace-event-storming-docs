@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Storming - participant cheatsheet</title>
+<meta name="description" content="One-page primer for Event Storming workshop participants: the one rule, the sticky vocabulary, how they connect, and the rules of the room." />
+<style>
+  /* Sticky colors mirror apps/web/src/lib/colors.ts KIND_HEX - the app's
+     canonical palette. If that file changes, change these. */
+  :root {
+    --evt: #ffa94d; --cmd: #8ec5ff; --act: #ffe066; --pol: #d0a9f5;
+    --agg: #ecc94b; --ext: #f8a8c8; --read: #9be09b; --hot: #ff6b6b;
+    --ink: #23201a; --ink-soft: #5c554a; --wall: #f4ead8;
+    --accent: #0a7d5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--wall); color: var(--ink);
+    line-height: 1.45; font-size: 15px;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 26px 26px 30px; }
+
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; border-bottom: 3px solid var(--ink); padding-bottom: 9px; }
+  h1 { font-size: 25px; letter-spacing: -0.3px; }
+  header .tag { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 2px; }
+  .intro { margin-top: 10px; font-size: 15px; }
+  .intro strong { color: var(--accent); }
+
+  h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 2.5px; margin: 20px 0 9px; color: var(--ink-soft); }
+  h2 .n { display: inline-block; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: var(--wall); text-align: center; line-height: 19px; font-size: 10.5px; margin-right: 7px; letter-spacing: 0; }
+
+  /* the one rule */
+  .rule {
+    margin-top: 16px; padding: 13px 18px; border: 3px solid var(--ink); border-radius: 4px;
+    background: var(--evt); box-shadow: 4px 4px 0 rgba(35,32,26,0.25);
+  }
+  .rule p:first-child { font-size: 11.5px; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 3px; }
+  .rule p.big { font-size: 19px; font-weight: 700; line-height: 1.3; }
+  .rule p.ex { margin-top: 5px; font-size: 13.5px; }
+  .rule p.ex em { font-style: normal; background: rgba(255,255,255,0.55); padding: 1px 7px; border-radius: 3px; margin-right: 6px; white-space: nowrap; }
+
+  /* sticky tiles - grid stretch keeps each row equal-height; ex pinned to bottom */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; align-items: stretch; }
+  .tile {
+    border-radius: 3px; padding: 9px 11px 10px; min-height: 100px;
+    box-shadow: 2px 3px 5px rgba(35,32,26,0.28);
+    display: flex; flex-direction: column;
+  }
+  .tile:nth-child(odd)  { transform: rotate(-0.6deg); }
+  .tile:nth-child(even) { transform: rotate(0.6deg); }
+  .tile .kind { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; }
+  .tile .say  { font-size: 13px; font-weight: 700; margin-top: 3px; line-height: 1.25; }
+  .tile .ex   { margin-top: auto; padding-top: 7px; font-size: 11.5px; color: rgba(35,32,26,0.78); }
+  .tile.hot   { color: #fff; }
+  .tile.hot .ex { color: rgba(255,255,255,0.92); }
+  .tier-note { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* mini-wall */
+  .wallfig { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 8px 10px 4px; }
+  .wallfig svg { width: 100%; height: auto; display: block; }
+  .wall-note { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* good vs mushy */
+  .gm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: stretch; }
+  .gm .pair { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 8px 10px; font-size: 13px; }
+  .gm .good, .gm .bad { display: flex; align-items: baseline; gap: 7px; }
+  .gm .bad { margin-top: 4px; color: var(--ink-soft); }
+  .gm .mark { font-weight: 800; width: 12px; flex: none; }
+  .gm .good .mark { color: var(--accent); }
+  .gm .bad .mark { color: #c0392b; }
+  .gm .chip { background: var(--evt); border-radius: 3px; padding: 0 7px; font-weight: 700; }
+  .gm .chip.h { background: var(--hot); color: #fff; }
+  .gm .mud { background: #e8e0d0; border-radius: 3px; padding: 0 7px; text-decoration: line-through; }
+  .gm .why { display: block; font-size: 11px; color: var(--ink-soft); margin-top: 3px; }
+
+  /* rules of the room + in the tool: CSS columns, so uneven items flow
+     independently instead of punching holes in shared grid rows */
+  .room, .tool { columns: 2; column-gap: 26px; }
+  .room p, .tool p { break-inside: avoid; margin-bottom: 8px; font-size: 14px; }
+  .room p { padding-left: 14px; position: relative; }
+  .room p::before { content: ""; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; background: var(--accent); border-radius: 1px; }
+  .tool p b { font-weight: 700; }
+
+  /* the arc: five phases + a dashed coda that is visibly NOT a phase */
+  .arc { display: grid; grid-template-columns: repeat(5, 1fr) 1fr; gap: 8px; align-items: stretch; }
+  .phase { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 8px 10px; }
+  .phase .num { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .phase .name { display: block; font-weight: 700; font-size: 13px; margin-top: 1px; }
+  .phase .what { font-size: 11.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.35; }
+  .phase.coda { border-style: dashed; background: transparent; }
+  .phase.coda .num { color: var(--ink-soft); }
+  .arc-note { font-size: 12.5px; color: var(--ink-soft); margin-top: 7px; }
+
+  footer { margin-top: 18px; border-top: 3px solid var(--ink); padding-top: 10px; }
+  footer p { font-size: 13px; }
+
+  @media (max-width: 700px) {
+    .tiles, .gm { grid-template-columns: repeat(2, 1fr); }
+    .arc { grid-template-columns: 1fr; }
+    .room, .tool { columns: 1; }
+  }
+  @media print {
+    body { font-size: 10.5px; line-height: 1.3; }
+    /* Full-bleed: @page margin 0 + equal inner padding, so the wall colour
+       reaches every edge (Chrome never paints the canvas into @page margins).
+       Content sits exactly where the old margin put it. */
+    html, body { background: var(--wall); }
+    .page { max-width: none; padding: 8mm; }
+    h1 { font-size: 18px; }
+    .intro { margin-top: 6px; font-size: 10.5px; }
+    .rule { margin-top: 8px; padding: 7px 12px; }
+    .rule p.big { font-size: 13px; }
+    .rule p.ex { font-size: 10px; margin-top: 2px; }
+    h2 { margin: 8px 0 5px; font-size: 10px; }
+    .tiles { gap: 7px; }
+    .tile { min-height: 58px; padding: 6px 8px 7px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
+    .tile .say { font-size: 10.5px; }
+    .tile .ex { font-size: 9px; padding-top: 3px; }
+    .tier-note { font-size: 9.5px; margin-top: 4px; }
+    .wallfig { padding: 5px 7px 2px; }
+    .wall-note { font-size: 9px; margin-top: 3px; }
+    .gm { gap: 7px; }
+    .gm .pair { padding: 5px 8px; font-size: 10px; }
+    .gm .why { font-size: 8.5px; }
+    .room, .tool { column-gap: 20px; }
+    .room p, .tool p { font-size: 10px; margin-bottom: 4px; }
+    .phase { padding: 5px 7px; }
+    .phase .name { font-size: 10px; }
+    .phase .what { font-size: 8.5px; }
+    .arc-note { font-size: 9.5px; margin-top: 3px; }
+    footer { margin-top: 8px; padding-top: 6px; }
+    footer p { font-size: 9.5px; }
+    .rule, .phase { box-shadow: none; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+  .pdfbtn { position: fixed; top: 14px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .pdfbtn:hover { background: var(--evt); }
+  @media print { .pdfbtn { display: none; } }
+</style>
+</head>
+<body>
+<button class="pdfbtn" onclick="window.print()" title="opens your browser's print dialog - choose 'Save as PDF' as the destination">⬇ Save as PDF</button>
+<div class="page">
+
+  <header>
+    <h1>Event Storming, before you walk in</h1>
+    <span class="tag">participant cheatsheet · 5-minute read</span>
+  </header>
+
+  <p class="intro">
+    You are joining a workshop where the room reconstructs how the business
+    actually works by putting <strong>facts that happened</strong> on a shared
+    timeline. No slides, no spec documents. The knowledge in your head is the
+    raw material, which means <strong>you cannot prepare, and you cannot be
+    underqualified</strong>.
+  </p>
+
+  <div class="rule">
+    <p>The one rule worth remembering</p>
+    <p class="big">Events are written in the past tense, because they happened.</p>
+    <p class="ex"><em>Order placed</em> <em>Payment declined</em> <em>Guest checked in</em>
+      If you can say "...and then X happened", X belongs on the wall.</p>
+  </div>
+
+  <h2><span class="n">1</span>You will write these</h2>
+  <div class="tiles">
+    <div class="tile" style="background: var(--evt)">
+      <span class="kind">Domain event</span>
+      <span class="say">"It happened."</span>
+      <span class="ex">Booking confirmed · Guest checked in</span>
+    </div>
+    <div class="tile hot" style="background: var(--hot)">
+      <span class="kind">Hotspot</span>
+      <span class="say">"We disagree, or we don't know."</span>
+      <span class="ex">Who owns overbooking?</span>
+    </div>
+    <div class="tile" style="background: var(--act)">
+      <span class="kind">Actor</span>
+      <span class="say">"Who did it."</span>
+      <span class="ex">Guest · Front-desk agent</span>
+    </div>
+    <div class="tile" style="background: var(--ext)">
+      <span class="kind">External system</span>
+      <span class="say">"The world outside."</span>
+      <span class="ex">Payment gateway · Email service</span>
+    </div>
+  </div>
+
+  <h2><span class="n">2</span>These emerge as the story firms up - recognize them, don't memorize them</h2>
+  <div class="tiles">
+    <div class="tile" style="background: var(--cmd)">
+      <span class="kind">Command</span>
+      <span class="say">"Someone wants it done."</span>
+      <span class="ex">Check in guest → Guest checked in</span>
+    </div>
+    <div class="tile" style="background: var(--pol)">
+      <span class="kind">Policy</span>
+      <span class="say">"Whenever X, then Y."</span>
+      <span class="ex">On no-show, charge the fee</span>
+    </div>
+    <div class="tile" style="background: var(--agg)">
+      <span class="kind">Aggregate</span>
+      <span class="say">"The thing it happens to."</span>
+      <span class="ex">Reservation · Room</span>
+    </div>
+    <div class="tile" style="background: var(--read)">
+      <span class="kind">Read model</span>
+      <span class="say">"What someone checks before deciding."</span>
+      <span class="ex">Tonight's arrivals list, read by the front desk</span>
+    </div>
+  </div>
+  <p class="tier-note">
+    Two yellows are deliberate: bright lemon for <b>actors</b> (people), deeper
+    honey for <b>aggregates</b> (things). The printed label on every sticky
+    settles any doubt.
+  </p>
+
+  <h2><span class="n">3</span>How they connect - the loop the wall will grow</h2>
+  <div class="wallfig">
+    <svg viewBox="0 0 1160 128" role="img" aria-label="Front-desk agent checks tonight's arrivals, issues Check in guest, which causes Guest checked in, which triggers On check-in notify housekeeping, which issues Prepare room, which causes Room prepared. Guest checked in happened to the Reservation aggregate.">
+      <defs>
+        <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#23201a"/></marker>
+      </defs>
+      <style>
+        .nd { rx: 4; stroke: #23201a; stroke-width: 1.4; }
+        .k  { font: 800 8.5px -apple-system, sans-serif; letter-spacing: 1.2px; fill: #23201a; }
+        .t  { font: 700 11.5px -apple-system, sans-serif; fill: #23201a; }
+        .v  { font: 600 9.5px -apple-system, sans-serif; fill: #5c554a; }
+        .ln { stroke: #23201a; stroke-width: 1.4; fill: none; }
+      </style>
+      <!-- read model, checked before acting -->
+      <rect class="nd" x="4" y="72" width="150" height="46" fill="#9be09b"/>
+      <text class="k" x="14" y="86">READ MODEL</text>
+      <text class="t" x="14" y="100">Tonight's arrivals</text>
+      <path class="ln" d="M 79 72 L 79 56" stroke-dasharray="4 3" marker-end="url(#a)"/>
+      <text class="v" x="86" y="66">checks first</text>
+      <!-- actor -->
+      <rect class="nd" x="4" y="6" width="150" height="46" fill="#ffe066"/>
+      <text class="k" x="14" y="20">ACTOR</text>
+      <text class="t" x="14" y="34">Front-desk agent</text>
+      <line class="ln" x1="154" y1="29" x2="196" y2="29" marker-end="url(#a)"/>
+      <text class="v" x="158" y="22">issues</text>
+      <!-- command -->
+      <rect class="nd" x="200" y="6" width="150" height="46" fill="#8ec5ff"/>
+      <text class="k" x="210" y="20">COMMAND</text>
+      <text class="t" x="210" y="34">Check in guest</text>
+      <line class="ln" x1="350" y1="29" x2="392" y2="29" marker-end="url(#a)"/>
+      <text class="v" x="354" y="22">causes</text>
+      <!-- event -->
+      <rect class="nd" x="396" y="6" width="150" height="46" fill="#ffa94d"/>
+      <text class="k" x="406" y="20">DOMAIN EVENT</text>
+      <text class="t" x="406" y="34">Guest checked in</text>
+      <line class="ln" x1="546" y1="29" x2="588" y2="29" marker-end="url(#a)"/>
+      <text class="v" x="549" y="22">triggers</text>
+      <!-- policy -->
+      <rect class="nd" x="592" y="6" width="176" height="46" fill="#d0a9f5"/>
+      <text class="k" x="602" y="20">POLICY</text>
+      <text class="t" x="602" y="34">On check-in, notify</text>
+      <text class="t" x="602" y="47">housekeeping</text>
+      <line class="ln" x1="768" y1="29" x2="810" y2="29" marker-end="url(#a)"/>
+      <text class="v" x="774" y="22">issues</text>
+      <!-- command 2 -->
+      <rect class="nd" x="814" y="6" width="150" height="46" fill="#8ec5ff"/>
+      <text class="k" x="824" y="20">COMMAND</text>
+      <text class="t" x="824" y="34">Prepare room</text>
+      <line class="ln" x1="964" y1="29" x2="1006" y2="29" marker-end="url(#a)"/>
+      <text class="v" x="968" y="22">causes</text>
+      <!-- event 2 -->
+      <rect class="nd" x="1010" y="6" width="146" height="46" fill="#ffa94d"/>
+      <text class="k" x="1020" y="20">DOMAIN EVENT</text>
+      <text class="t" x="1020" y="34">Room prepared</text>
+      <!-- aggregate hint -->
+      <rect x="396" y="72" width="150" height="40" rx="4" fill="#ecc94b" stroke="#23201a" stroke-width="1.4" stroke-dasharray="5 3"/>
+      <text class="k" x="406" y="86">AGGREGATE</text>
+      <text class="t" x="406" y="100">Reservation</text>
+      <path class="ln" d="M 471 72 L 471 56" stroke-dasharray="4 3" marker-end="url(#a)"/>
+      <text class="v" x="478" y="66">it happened to</text>
+    </svg>
+  </div>
+  <p class="wall-note">
+    You never build this diagram by hand - it grows out of the stickies as the
+    room wires them up. Recognizing the shape is enough.
+  </p>
+
+  <h2><span class="n">4</span>A good sticky vs a mushy one</h2>
+  <div class="gm">
+    <div class="pair">
+      <p class="good"><span class="mark">✓</span><span><span class="chip">Payment declined</span></span></p>
+      <p class="bad"><span class="mark">✕</span><span><span class="mud">payment stuff</span></span></p>
+      <span class="why">a fact that happened, not a topic area</span>
+    </div>
+    <div class="pair">
+      <p class="good"><span class="mark">✓</span><span><span class="chip">Guest checked in</span></span></p>
+      <p class="bad"><span class="mark">✕</span><span><span class="mud">check-in process</span></span></p>
+      <span class="why">one moment in time, not a whole workflow</span>
+    </div>
+    <div class="pair">
+      <p class="good"><span class="mark">✓</span><span><span class="chip h">Who owns overbooking?</span></span></p>
+      <p class="bad"><span class="mark">✕</span><span><span class="mud">overbooking is tricky</span></span></p>
+      <span class="why">a hotspot names the question to be answered</span>
+    </div>
+  </div>
+
+  <h2><span class="n">5</span>Rules of the room</h2>
+  <div class="room">
+    <p>Duplicates are fine. Wrong is fine. <strong>Silence is the only failure.</strong> Someone already wrote your sticky? Good - it means it matters.</p>
+    <p>Arguing about what a word means is not a distraction. <strong>The argument is the deliverable.</strong></p>
+    <p>Disagreements don't get settled mid-flow. <strong>Park them as red hotspots</strong> - often the most valuable output of the day.</p>
+    <p>No solutions yet. "Which database" and "which topic name" <strong>have their own phase later.</strong> Park it.</p>
+    <p>You don't know the whole flow? <strong>Nobody does.</strong> That is exactly why everyone is in the room.</p>
+  </div>
+
+  <h2><span class="n">6</span>The arc of the session</h2>
+  <div class="arc">
+    <div class="phase"><span class="num">1 · Concept</span><span class="name">Agree what words mean</span><p class="what">name the actors, the systems, the vocabulary</p></div>
+    <div class="phase"><span class="num">2 · Use case</span><span class="name">Pick the story</span><p class="what">choose the journey worth storming</p></div>
+    <div class="phase"><span class="num">3 · Storming</span><span class="name">The storm</span><p class="what">dump events, order the timeline, wire the flow</p></div>
+    <div class="phase"><span class="num">4 · Architecture</span><span class="name">Design how the system tells it</span><p class="what">events become real, addressable messages</p></div>
+    <div class="phase"><span class="num">5 · Build plan</span><span class="name">Who builds what</span><p class="what">owners and order; every hotspot gets a name</p></div>
+    <div class="phase coda"><span class="num">→ after the room</span><span class="name">The model goes to work</span><p class="what">your events land in the organization's event catalog (Solace Event Portal)</p></div>
+  </div>
+  <p class="arc-note">
+    Phases 1 to 3 are <b>discovery</b> - your part is writing and arguing. Phases
+    4 and 5 shift to <b>design</b>: the facilitator drives, and your part shifts
+    to advising and objecting early. The dashed box is not part of the session -
+    it is where the work lands, and the reason precision today pays.
+  </p>
+
+  <h2><span class="n">7</span>In the tool</h2>
+  <div class="tool">
+    <p><b>Join</b> via the invite link - your name, no account. The link sets what you can do.</p>
+    <p><b>Add</b> a sticky: pick a color, double-click the wall, type, Enter.</p>
+    <p><b>Move</b> by dragging. Views are yours alone - switching moves nothing for anyone else.</p>
+    <p><b>Vote</b> 👍 on any sticky once the storm opens - it steers what gets attention first.</p>
+    <p><b>Chat</b> 💬 any time; the little <b>?</b> always answers "what can I do right now?".</p>
+  </div>
+
+  <footer>
+    <p>
+      The wall does not die in a photo. Everything you write becomes a living
+      model the architects carry forward after the session - which is why a
+      sticky in your words, even a wrong one, is worth more than a polished
+      one that never got written.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

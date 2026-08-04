@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From the wall to Event Portal - translation map</title>
+<meta name="description" content="How every element of the stormed wall becomes a Solace Event Portal design object - and what deliberately stays behind." />
+<style>
+  /* Sticky colors mirror apps/web/src/lib/colors.ts KIND_HEX. */
+  :root {
+    --evt: #ffa94d; --cmd: #8ec5ff; --act: #ffe066; --pol: #d0a9f5;
+    --agg: #ecc94b; --ext: #f8a8c8; --read: #9be09b; --hot: #ff6b6b;
+    --ink: #23201a; --ink-soft: #5c554a; --wall: #f4ead8;
+    --accent: #0a7d5a; --ep: #123a5c; --ep-soft: #eaf2fa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--wall); color: var(--ink); line-height: 1.45; font-size: 15px; }
+  .page { max-width: 900px; margin: 0 auto; padding: 26px 26px 30px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; border-bottom: 3px solid var(--ink); padding-bottom: 9px; }
+  h1 { font-size: 25px; letter-spacing: -0.3px; }
+  header .tag { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 2px; }
+  .intro { margin-top: 10px; font-size: 15px; }
+  .intro strong { color: var(--accent); }
+  h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 2.5px; margin: 20px 0 9px; color: var(--ink-soft); }
+
+  /* mapping rows: wall element | arrow | EP object */
+  .map { display: grid; grid-template-columns: 1fr 44px 1.15fr; gap: 8px 0; align-items: stretch; }
+  .m-wall { border-radius: 3px; padding: 8px 11px; box-shadow: 2px 2px 4px rgba(35,32,26,0.22); display: flex; flex-direction: column; justify-content: center; }
+  .m-wall .kind { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px; }
+  .m-wall .what { font-size: 13px; font-weight: 700; line-height: 1.25; }
+  .m-arrow { display: flex; align-items: center; justify-content: center; font-size: 17px; color: var(--ink-soft); }
+  .m-ep { border: 2px solid var(--ep); border-radius: 4px; background: var(--ep-soft); padding: 8px 11px; display: flex; flex-direction: column; justify-content: center; }
+  .m-ep .obj { font-size: 13px; font-weight: 700; color: var(--ep); }
+  .m-ep .note { font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; line-height: 1.3; }
+
+  .frame { border-left: 4px solid var(--ep); background: #fff; padding: 8px 12px; font-size: 13px; margin-bottom: 10px; }
+  .frame code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: var(--ep-soft); padding: 0 4px; border-radius: 3px; }
+  .frame.asym { margin: 10px 0 0; border-left-color: var(--ink-soft); }
+
+  /* stays behind strip */
+  .stay { border: 2px dashed var(--ink); border-radius: 4px; padding: 10px 14px; background: transparent; }
+  .stay p { font-size: 13px; margin: 3px 0; padding-left: 14px; position: relative; }
+  .stay p::before { content: "⌂"; position: absolute; left: 0; top: 0; color: var(--ink-soft); font-size: 11px; }
+  .stay b { font-weight: 700; }
+
+  .caveat { margin-top: 14px; padding: 10px 14px; border: 3px solid var(--ink); border-radius: 4px; background: var(--evt); font-size: 13.5px; }
+  .caveat b { font-weight: 800; }
+
+  footer { margin-top: 16px; border-top: 3px solid var(--ink); padding-top: 9px; }
+  footer p { font-size: 13px; }
+
+  @media (max-width: 700px) { .map { grid-template-columns: 1fr; } .m-arrow { transform: rotate(90deg); padding: 2px 0; } }
+  @media print {
+    body { font-size: 10.5px; line-height: 1.3; }
+    /* Full-bleed: @page margin 0 + equal inner padding, so the wall colour
+       reaches every edge (Chrome never paints the canvas into @page margins).
+       Content sits exactly where the old margin put it. */
+    html, body { background: var(--wall); }
+    .page { max-width: none; padding: 9mm; }
+    h1 { font-size: 18px; }
+    .intro { margin-top: 6px; font-size: 10.5px; }
+    h2 { margin: 9px 0 5px; font-size: 10px; }
+    .map { gap: 5px 0; }
+    .m-wall { padding: 5px 9px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
+    .m-wall .what { font-size: 10.5px; }
+    .m-ep { padding: 5px 9px; }
+    .m-ep .obj { font-size: 10.5px; }
+    .m-ep .note { font-size: 9px; }
+    .m-arrow { font-size: 13px; }
+    .frame { padding: 5px 9px; font-size: 9.5px; margin-bottom: 6px; }
+    .frame code { font-size: 9px; }
+    .frame.asym { margin: 6px 0 0; }
+    .stay { padding: 6px 10px; }
+    .stay p { font-size: 9.5px; margin: 2px 0; }
+    .caveat { margin-top: 8px; padding: 6px 10px; font-size: 10px; }
+    footer { margin-top: 8px; padding-top: 6px; }
+    footer p { font-size: 9.5px; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+  .pdfbtn { position: fixed; top: 14px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .pdfbtn:hover { background: var(--evt); }
+  @media print { .pdfbtn { display: none; } }
+</style>
+</head>
+<body>
+<button class="pdfbtn" onclick="window.print()" title="opens your browser's print dialog - choose 'Save as PDF' as the destination">⬇ Save as PDF</button>
+<div class="page">
+
+  <header>
+    <h1>From the wall to Event Portal</h1>
+    <span class="tag">translation map · for the architects who receive the export</span>
+  </header>
+
+  <p class="intro">
+    The workshop's finished wall exports as an <strong>Event Portal import file</strong>
+    you load through EP's own UI. Every design object in that file traces back to
+    something the room agreed on - this sheet is the dictionary, including what
+    <strong>deliberately does not cross over</strong>.
+  </p>
+
+  <h2>What becomes what</h2>
+  <p class="frame">
+    <b>Applications come from the <code>system</code> attribute - never from a command
+    or a policy sticky.</b> An event answers "who emitted this?"; a policy answers
+    "whose code reacts?". Both answers are system tags, and only system tags become
+    Applications.
+  </p>
+  <div class="map">
+    <div class="m-wall" style="background:#fff; border:2px solid var(--ink); box-shadow:none;">
+      <span class="kind">Context boundary ⬚</span>
+      <span class="what">"Payments &amp; Wallet" + its pitch</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Application Domain</span>
+      <span class="note">named "WORKSHOP: Context" so one workshop's domains group together; the room's pitch becomes the description</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--ext)">
+      <span class="kind">System attribute</span>
+      <span class="what">on ANY sticky - event, policy or command</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Application</span>
+      <span class="note">homed in the domain most of its stickies live in (majority vote; a spread earns a warning)</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--evt)">
+      <span class="kind">Domain event</span>
+      <span class="what">"Payment authorized"</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Event + Event Version</span>
+      <span class="note">QoS intent and owning team ride along in the description - EP has no first-class fields for them</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--evt)">
+      <span class="kind">Resolved topic</span>
+      <span class="what">root/payment/authorized/v1/{tripId}</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Topic address</span>
+      <span class="note">each segment an address level; {placeholders} become variable levels, the rest literal</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--evt)">
+      <span class="kind">Schema sketch</span>
+      <span class="what">field list or JSON sample</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Schema + Schema Version</span>
+      <span class="note">coerced to valid JSON Schema; an event without one imports with a "schema TBD" marker, never blocked</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--ext)">
+      <span class="kind">System on the event</span>
+      <span class="what">who emits "Payment authorized"</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Publish relation</span>
+      <span class="note">the emitter attribute declares the publisher - independent of any command</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--pol)">
+      <span class="kind">Event → policy link <b>+ the policy's own system</b></span>
+      <span class="what">"...triggers On payment, notify" · run by <i>Billing</i></span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Subscribe relation</span>
+      <span class="note"><b>The policy is the handler, not the application</b> - its system is who runs it, and that application becomes the subscriber. <b>No system on the policy = no subscribe relation</b> (the export warns, and Board Review flags it). Relations come only from links the room accepted, never from layout.</span>
+    </div>
+  </div>
+
+  <p class="frame asym">
+    <b>Why publishing needs one tag and subscribing needs two.</b> Being emitted by X
+    is a property <i>of the event</i>, so the event's own tag settles it. Being consumed
+    is not a property of the event at all - it is a decision somebody made. The policy
+    is the record of that decision; its system is who acts on it. (Read models consume
+    nothing in EP: only event→policy links produce subscribe relations.)
+  </p>
+
+  <h2>What stays workshop-side, on purpose</h2>
+  <div class="stay">
+    <p><b>Actors and read models</b> - they answer "who decides, using what"; EP models systems, not people.</p>
+    <p><b>Commands</b> - service entry points for your design docs; EP's catalog is events.</p>
+    <p><b>Hotspots and their decisions</b> - exported as the workbook's <b>Hotspots &amp; Decisions</b> sheet: the organization's decision backlog.</p>
+    <p><b>Plan tags</b> (build owner, now/next/later) - delivery commitments are workshop exhaust, not architecture.</p>
+    <p><b>Votes, chat, history</b> - the room's process; replayable in the tool from the board file.</p>
+  </div>
+
+  <p class="caveat">
+    <b>Everything imports as DRAFT.</b> The workshop proposes; your Event Portal
+    governance disposes. Review each object before promoting - the file is a
+    faithful record of the room, not a decree.
+  </p>
+
+  <footer>
+    <p>
+      Companion artifacts: the workbook (spreadsheet of everything), the
+      architecture diagram (SVG of applications and events), and the board file
+      (reopen the session later, history intact). See the handoff sheet.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
