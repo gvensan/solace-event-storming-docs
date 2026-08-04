@@ -136,12 +136,16 @@
     .rule, .phase { box-shadow: none; }
     @page { size: A4 portrait; margin: 0; }
   }
+  .docsbtn { position: fixed; top: 14px; left: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); text-decoration: none; font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .docsbtn:hover { background: var(--evt); }
+  @media print { .docsbtn { display: none; } }
   .pdfbtn { position: fixed; top: 14px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
   .pdfbtn:hover { background: var(--evt); }
   @media print { .pdfbtn { display: none; } }
 </style>
 </head>
 <body>
+<a class="docsbtn" href="./" title="back to the documentation home">← docs</a>
 <button class="pdfbtn" onclick="window.print()" title="opens your browser's print dialog - choose 'Save as PDF' as the destination">⬇ Save as PDF</button>
 <div class="page">
 
