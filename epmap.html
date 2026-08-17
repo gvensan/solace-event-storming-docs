@@ -112,13 +112,23 @@
   </p>
   <div class="map">
     <div class="m-wall" style="background:#fff; border:2px solid var(--ink); box-shadow:none;">
-      <span class="kind">Context boundary ⬚</span>
-      <span class="what">"Payments &amp; Wallet" + its pitch</span>
+      <span class="kind">The board itself</span>
+      <span class="what">"Payments &amp; Wallet" - one board is one slice of the business</span>
     </div>
     <div class="m-arrow">→</div>
     <div class="m-ep">
       <span class="obj">Application Domain</span>
-      <span class="note">named "WORKSHOP: Context" so one workshop's domains group together; the room's pitch becomes the description</span>
+      <span class="note">exactly one per board, named "WORKSHOP: Board" so a workshop's domains group together</span>
+    </div>
+
+    <div class="m-wall" style="background:#fff; border:2px solid var(--ink); box-shadow:none;">
+      <span class="kind">Context boundary ⬚</span>
+      <span class="what">the split INSIDE the board, plus its pitch</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Description text</span>
+      <span class="note">not a domain - contexts are an intra-board split, so they ride in the domain's description and as "Context:" lines. Draw them anyway: that description is how the domain explains itself</span>
     </div>
 
     <div class="m-wall" style="background: var(--ext)">
@@ -128,7 +138,17 @@
     <div class="m-arrow">→</div>
     <div class="m-ep">
       <span class="obj">Application</span>
-      <span class="note">homed in the domain most of its stickies live in (majority vote; a spread earns a warning)</span>
+      <span class="note">a vendor or external participant, tagged with the context most of its stickies live in (majority vote; a spread earns a warning)</span>
+    </div>
+
+    <div class="m-wall" style="background: var(--agg, #f3d27a)">
+      <span class="kind">Aggregate</span>
+      <span class="what">"Trip", "Reservation" - the thing it happened to</span>
+    </div>
+    <div class="m-arrow">→</div>
+    <div class="m-ep">
+      <span class="obj">Application (internal)</span>
+      <span class="note">your own service, not a vendor: it publishes the events grouped into it and consumes through the policies grouped into it. This is what gives an internally-emitted event a publisher at all</span>
     </div>
 
     <div class="m-wall" style="background: var(--evt)">
@@ -168,7 +188,7 @@
     <div class="m-arrow">→</div>
     <div class="m-ep">
       <span class="obj">Publish relation</span>
-      <span class="note">the emitter attribute declares the publisher - independent of any command</span>
+      <span class="note">the emitter attribute declares the publisher - independent of any command. An event grouped into an aggregate is published by that aggregate too, marked as ownership rather than emission</span>
     </div>
 
     <div class="m-wall" style="background: var(--pol)">
@@ -198,6 +218,18 @@
     <p><b>Plan tags</b> (build owner, now/next/later) - delivery commitments are workshop exhaust, not architecture.</p>
     <p><b>Votes, chat, history</b> - the room's process; replayable in the tool from the board file.</p>
   </div>
+
+  <h2>One workshop, several boards</h2>
+  <p class="frame">
+    <b>Export the workshop, not just the board.</b> A workshop usually storms several
+    domains, and the same event shows up on more than one wall. The map board offers
+    <b>Event Portal file (multi-domain: workshop, merged)</b>: one domain per board, and
+    <b>one event per name</b>, homed in the board that owns it - a ★ claim first, then
+    the domain it was seated in on the map. The owner's topic, schema and QoS become the
+    contract; where another board disagrees, the file warns instead of quietly picking.
+    Sharing is derived from actual use across boards, so the import shows reuse rather
+    than five copies of "Payment authorized".
+  </p>
 
   <p class="caveat">
     <b>Everything imports as DRAFT.</b> The workshop proposes; your Event Portal
