@@ -153,6 +153,18 @@ a board created any other way is invisible to it.</li>
 <li><strong>Three blocks in the seed are hand-added</strong> and cannot survive a re-capture from a live
 workshop: participant job titles (set at join time), the dot votes, and the chat thread.
 The seed’s header lists them; port them forward if you regenerate.</li>
+<li><strong>The harness opts into the clock.</strong> The facilitator’s phase stepper and timer are hidden
+unless “run this workshop to a clock” is ticked - a workshop row since 2026-08-18, so the
+harness sends one <code dir="auto">PATCH /workshops/:id {timeboxed:true}</code> at startup (<code dir="auto">INJECT</code> still seeds
+<code dir="auto">railOpen=1</code>, so the rail shot shows names). Without it the phase-stepper and timer-bar
+captures skip silently - which is exactly what happened on the first 2026-08-18 run.</li>
+<li><strong>The run creates two throwaway workshops.</strong> The new-workshop and home-picker shots go
+through the real create flow, so an “ACME Order Management” workshop is left behind per
+run. Delete them afterwards (its map board cascades the workshop) or the facilitator
+picker fills up with capture residue.</li>
+<li><strong>Two AI shots cannot be captured</strong> while AI is parked: <code dir="auto">facilitator-assist-01-draft-flow</code>
+and <code dir="auto">facilitator-assist-02-synthesis</code> need a live LLM key, so their placeholders stay
+unfilled. Everything else is covered - 47 assets, no orphans.</li>
 <li><strong>The workshop topic root is captured explicitly.</strong> It lives on the workshop row, not in
 any board’s event log, so <code dir="auto">scripts/board-to-seed</code> writes it into the generated
 <code dir="auto">POST /workshops</code> body. A seed without it would recreate the workshop with no top level

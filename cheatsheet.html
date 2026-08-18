@@ -108,15 +108,15 @@
        reaches every edge (Chrome never paints the canvas into @page margins).
        Content sits exactly where the old margin put it. */
     html, body { background: var(--wall); }
-    .page { max-width: none; padding: 8mm; }
+    .page { max-width: none; padding: 7mm 8mm; }
     h1 { font-size: 18px; }
     .intro { margin-top: 6px; font-size: 10.5px; }
     .rule { margin-top: 8px; padding: 7px 12px; }
     .rule p.big { font-size: 13px; }
     .rule p.ex { font-size: 10px; margin-top: 2px; }
-    h2 { margin: 8px 0 5px; font-size: 10px; }
+    h2 { margin: 5px 0 3px; font-size: 10px; }
     .tiles { gap: 7px; }
-    .tile { min-height: 58px; padding: 6px 8px 7px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
+    .tile { min-height: 54px; padding: 5px 8px 6px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
     .tile .say { font-size: 10.5px; }
     .tile .ex { font-size: 9px; padding-top: 3px; }
     .tier-note { font-size: 9.5px; margin-top: 4px; }
@@ -126,12 +126,13 @@
     .gm .pair { padding: 5px 8px; font-size: 10px; }
     .gm .why { font-size: 8.5px; }
     .room, .tool { column-gap: 20px; }
-    .room p, .tool p { font-size: 10px; margin-bottom: 4px; }
+    .room p, .tool p { font-size: 10px; margin-bottom: 2px; }
     .phase { padding: 5px 7px; }
     .phase .name { font-size: 10px; }
     .phase .what { font-size: 8.5px; }
     .arc-note { font-size: 9.5px; margin-top: 3px; }
-    footer { margin-top: 8px; padding-top: 6px; }
+    .arc-lede { font-size: 9.5px !important; line-height: 1.35 !important; margin-bottom: 5px !important; }
+    footer { margin-top: 4px; padding-top: 4px; }
     footer p { font-size: 9.5px; }
     .rule, .phase { box-shadow: none; }
     @page { size: A4 portrait; margin: 0; }
@@ -143,6 +144,11 @@
   .pdfbtn:hover { background: var(--evt); }
   @media print { .pdfbtn { display: none; } }
 </style>
+<!-- ONE PAGE IS A CONTRACT (verified 2026-08-18). The docs promise every sheet
+     prints to a single A4 page; two of the four had quietly grown to two, with a
+     nearly-empty second sheet. After editing, re-check:
+       node -e "const{chromium}=require('playwright');(async()=>{const b=await chromium.launch(),p=await b.newPage();await p.goto('file://'+process.argv[1]);await p.pdf({path:'/tmp/x.pdf',format:'A4',printBackground:true});const n=(require('fs').readFileSync('/tmp/x.pdf').toString('latin1').match(/\/Type\s*\/Page[^s]/g)||[]).length;console.log(n);await b.close()})()" <abs-path>
+     Spacing lives in the @media print block - tighten there, never below ~8.5px type. -->
 </head>
 <body>
 <a class="docsbtn" href="./" title="back to the documentation home">← docs</a>
@@ -325,6 +331,11 @@
   </div>
 
   <h2><span class="n">6</span>The arc of the session</h2>
+  <p class="arc-lede" style="margin:0 0 8px;font-size:9.4pt;line-height:1.45;color:#5f5443">
+    You may open on the workshop's <b>big-picture map</b> first: one wall for the whole
+    business, where the room floods coarse events and names the areas worth a session of
+    their own. The five phases below then run on each of those areas, one board at a time.
+  </p>
   <div class="arc">
     <div class="phase"><span class="num">1 · Concept</span><span class="name">Agree what words mean</span><p class="what">name the actors, the systems, the vocabulary</p></div>
     <div class="phase"><span class="num">2 · Use case</span><span class="name">Pick the story</span><p class="what">choose the journey worth storming</p></div>
@@ -343,10 +354,12 @@
   <h2><span class="n">7</span>In the tool</h2>
   <div class="tool">
     <p><b>Join</b> via the invite link - your name, no account. The link sets what you can do.</p>
-    <p><b>Add</b> a sticky: pick a color, double-click the wall, type, Enter.</p>
+    <p><b>Add</b> a sticky: pick a color from the left rail, double-click the wall, type, Enter.</p>
     <p><b>Move</b> by dragging. Views are yours alone - switching moves nothing for anyone else.</p>
     <p><b>Vote</b> 👍 on any sticky once the storm opens - it steers what gets attention first.</p>
+    <p><b>Follow the wiring</b> with the rail's two toggles: <b>flow links</b> (what causes what) and <b>cast links</b> (who takes part). Both are yours to show or hide.</p>
     <p><b>Chat</b> 💬 any time; the little <b>?</b> always answers "what can I do right now?".</p>
+    <p><b>⚙ settings</b> shows the session's rules read-only (Style is yours); click a title's 🔒 to see what the lock means - boards lock one by one.</p>
   </div>
 
   <footer>

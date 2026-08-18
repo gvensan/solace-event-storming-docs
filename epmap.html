@@ -57,24 +57,24 @@
        reaches every edge (Chrome never paints the canvas into @page margins).
        Content sits exactly where the old margin put it. */
     html, body { background: var(--wall); }
-    .page { max-width: none; padding: 9mm; }
+    .page { max-width: none; padding: 7mm 9mm; }
     h1 { font-size: 18px; }
     .intro { margin-top: 6px; font-size: 10.5px; }
-    h2 { margin: 9px 0 5px; font-size: 10px; }
-    .map { gap: 5px 0; }
-    .m-wall { padding: 5px 9px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
+    h2 { margin: 6px 0 4px; font-size: 10px; }
+    .map { gap: 4px 0; }
+    .m-wall { padding: 4px 9px; box-shadow: none; border: 1px solid rgba(35,32,26,0.35); }
     .m-wall .what { font-size: 10.5px; }
-    .m-ep { padding: 5px 9px; }
+    .m-ep { padding: 4px 9px; }
     .m-ep .obj { font-size: 10.5px; }
     .m-ep .note { font-size: 9px; }
     .m-arrow { font-size: 13px; }
-    .frame { padding: 5px 9px; font-size: 9.5px; margin-bottom: 6px; }
+    .frame { padding: 4px 9px; font-size: 9.5px; margin-bottom: 5px; line-height: 1.32; }
     .frame code { font-size: 9px; }
     .frame.asym { margin: 6px 0 0; }
-    .stay { padding: 6px 10px; }
+    .stay { padding: 5px 10px; }
     .stay p { font-size: 9.5px; margin: 2px 0; }
-    .caveat { margin-top: 8px; padding: 6px 10px; font-size: 10px; }
-    footer { margin-top: 8px; padding-top: 6px; }
+    .caveat { margin-top: 6px; padding: 5px 10px; font-size: 10px; }
+    footer { margin-top: 6px; padding-top: 5px; }
     footer p { font-size: 9.5px; }
     @page { size: A4 portrait; margin: 0; }
   }
@@ -85,6 +85,11 @@
   .pdfbtn:hover { background: var(--evt); }
   @media print { .pdfbtn { display: none; } }
 </style>
+<!-- ONE PAGE IS A CONTRACT (verified 2026-08-18). The docs promise every sheet
+     prints to a single A4 page; two of the four had quietly grown to two, with a
+     nearly-empty second sheet. After editing, re-check:
+       node -e "const{chromium}=require('playwright');(async()=>{const b=await chromium.launch(),p=await b.newPage();await p.goto('file://'+process.argv[1]);await p.pdf({path:'/tmp/x.pdf',format:'A4',printBackground:true});const n=(require('fs').readFileSync('/tmp/x.pdf').toString('latin1').match(/\/Type\s*\/Page[^s]/g)||[]).length;console.log(n);await b.close()})()" <abs-path>
+     Spacing lives in the @media print block - tighten there, never below ~8.5px type. -->
 </head>
 <body>
 <a class="docsbtn" href="./" title="back to the documentation home">← docs</a>
@@ -97,8 +102,10 @@
   </header>
 
   <p class="intro">
-    The workshop's finished wall exports as an <strong>Event Portal import file</strong>
-    you load through EP's own UI. Every design object in that file traces back to
+    The workshop's finished wall becomes an <strong>Event Portal import file</strong> -
+    downloaded and loaded through EP's own UI, or <strong>pushed straight into a
+    tenant</strong> from the same toolbar (one board, or the whole workshop from the map).
+    Either way the artifact is identical. Every design object in it traces back to
     something the room agreed on - this sheet is the dictionary, including what
     <strong>deliberately does not cross over</strong>.
   </p>
@@ -163,12 +170,12 @@
 
     <div class="m-wall" style="background: var(--evt)">
       <span class="kind">Resolved topic</span>
-      <span class="what">root/payment/authorized/v1/{tripId}</span>
+      <span class="what">acme/air-res &nbsp;+&nbsp; payment/authorized/v1/{tripId}</span>
     </div>
     <div class="m-arrow">→</div>
     <div class="m-ep">
       <span class="obj">Topic address</span>
-      <span class="note">each segment an address level; {placeholders} become variable levels, the rest literal</span>
+      <span class="note">three levels compose it: the <b>workshop root</b> (the customer's naming space, set once for every board) + the <b>board sub-root</b> + the <b>relative path</b> typed on the sticky. Each segment becomes an address level; {placeholders} become variable levels, the rest literal</span>
     </div>
 
     <div class="m-wall" style="background: var(--evt)">

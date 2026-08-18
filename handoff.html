@@ -70,6 +70,11 @@
   .pdfbtn:hover { background: var(--evt); }
   @media print { .pdfbtn { display: none; } }
 </style>
+<!-- ONE PAGE IS A CONTRACT (verified 2026-08-18). The docs promise every sheet
+     prints to a single A4 page; two of the four had quietly grown to two, with a
+     nearly-empty second sheet. After editing, re-check:
+       node -e "const{chromium}=require('playwright');(async()=>{const b=await chromium.launch(),p=await b.newPage();await p.goto('file://'+process.argv[1]);await p.pdf({path:'/tmp/x.pdf',format:'A4',printBackground:true});const n=(require('fs').readFileSync('/tmp/x.pdf').toString('latin1').match(/\/Type\s*\/Page[^s]/g)||[]).length;console.log(n);await b.close()})()" <abs-path>
+     Spacing lives in the @media print block - tighten there, never below ~8.5px type. -->
 </head>
 <body>
 <a class="docsbtn" href="./" title="back to the documentation home">← docs</a>
@@ -101,10 +106,11 @@
       <span class="ext" style="background: var(--cmd)">.JSON</span>
       <span class="name">The Event Portal import file</span>
       <p class="for">Domains, applications, events, schemas, topic addresses and
-      pub/sub relations - <b>imported through EP's own UI</b>, everything arriving
-      as DRAFT for your governance to review. One board exports one domain; from the
-      <b>map</b>, the merged workshop file covers every board with one event per name.
-      The translation dictionary is the companion "wall to Event Portal" sheet.</p>
+      pub/sub relations - <b>imported through EP's own UI, or pushed into a tenant
+      from the toolbar</b>, everything arriving as DRAFT for your governance to review.
+      One board exports one domain; from the <b>map</b>, the merged workshop file covers
+      every board with one event per name. The translation dictionary is the companion
+      "wall to Event Portal" sheet.</p>
     </div>
     <div class="art">
       <span class="ext" style="background: var(--evt)">.SVG</span>
