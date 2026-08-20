@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 981.6 987.6" width="981.6" height="987.6" style="max-width:100%;height:auto" font-family="system-ui, sans-serif">
+<defs>
+<linearGradient id="epd-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9e3d3"/><stop offset="1" stop-color="#dcd3bd"/></linearGradient>
+<marker id="epd-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="rgba(43,33,24,0.75)"/></marker>
+<marker id="epd-arrow-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7c5cbf"/></marker>
+<marker id="epd-arrow-agg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8a6d1d"/></marker>
+</defs>
+<g id="epd-content">
+<rect x="0" y="0" width="981.6" height="987.6" fill="url(#epd-wall)"/>
+<text x="40" y="34" font-size="22" font-weight="700" fill="#2b2118">Order to Pickup</text>
+<text x="40" y="55" font-size="12" fill="#2b2118" opacity="0.75">event architecture · Event Portal graph view: domains, applications, events</text>
+<text x="941.6" y="34" text-anchor="end" font-size="11" fill="#2b2118" opacity="0.85">arrow into an event = published by&#160;&#160;·&#160;&#160;arrow into an application = consumed by</text>
+<g id="epd-legend"><circle cx="40" cy="76" r="6" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.2"/><text x="54" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">event</text><circle cx="98" cy="76" r="6" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.2"/><circle cx="98" cy="76" r="9.5" fill="none" stroke="#b07713" stroke-width="1.6" stroke-dasharray="3 2"/><text x="112" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">shared event (⇄)</text><polygon points="228.1,72.5 228.1,79.5 222,83 215.9,79.5 215.9,72.5 222,69" fill="#fff" fill-opacity="0.9" stroke="#8a6d1d" stroke-width="1.8"/><text x="236" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">internal service</text><circle cx="336" cy="76" r="6.5" fill="#fff" fill-opacity="0.9" stroke="#f8a8c8" stroke-width="1.8" stroke-dasharray="2.5 2"/><text x="350" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">external system</text><line x1="442" y1="76" x2="458" y2="76" stroke="#7c5cbf" stroke-width="1.8" marker-end="url(#epd-arrow-x)"/><text x="464" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">cross-domain flow</text><line x1="560" y1="76" x2="576" y2="76" stroke="#8a6d1d" stroke-width="1.5" stroke-dasharray="1.5 3" marker-end="url(#epd-arrow-agg)"/><text x="582" y="80" font-size="10.5" fill="#2b2118" opacity="0.85">owned by (aggregate)</text></g>
+<rect data-epd-cell="1" data-x="40" data-y="104" data-w="901.6" data-h="803.6" x="40" y="104" width="901.6" height="803.6" rx="14" fill="hsla(205, 45%, 52%, 0.14)" stroke="rgba(43, 33, 24, 0.5)" stroke-width="2" stroke-dasharray="8 5"/>
+<rect x="52" y="114" width="184" height="20" rx="3" fill="hsl(205, 34%, 27%)"/>
+<text x="62" y="128" font-size="10.5" letter-spacing="1.2" fill="#f3e7d3">SSC: ORDER TO PICKUP</text>
+<line x1="201.9" y1="873.6" x2="387.6" y2="873.6" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<path d="M 627.5 815.6 Q 673.2 832.9 708.1 867.1" fill="none" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<path d="M 626.1 800.8 Q 669.9 744.9 727.6 703.5" fill="none" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<line x1="132" y1="501.5" x2="132" y2="683.7" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<line x1="308.2" y1="164.8" x2="192.3" y2="288.8" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<path d="M 709.8 868.2 Q 664.1 850.8 629.2 816.6" fill="none" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<path d="M 729.1 702.1 Q 685.2 758 627.5 799.4" fill="none" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<line x1="135.1" y1="705.2" x2="185.6" y2="860.3" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<line x1="181.5" y1="307.3" x2="135.7" y2="476" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<line x1="409.2" y1="870.8" x2="604" y2="813.1" stroke="rgba(43,33,24,0.5)" stroke-width="1.4" marker-end="url(#epd-arrow)"/>
+<circle cx="617.4" cy="809.1" r="11" fill="#fff" fill-opacity="0.9" stroke="#f8a8c8" stroke-width="2.5" stroke-dasharray="3 2.5"/>
+<text x="617.4" y="833.1" text-anchor="middle" font-size="11" font-weight="700" fill="#2b2118">Barista System</text>
+<text x="617.4" y="845.1" text-anchor="middle" font-size="8" letter-spacing="1" fill="#2b2118" opacity="0.7">APPLICATION</text>
+<circle cx="189.9" cy="873.6" r="11" fill="#fff" fill-opacity="0.9" stroke="#f8a8c8" stroke-width="2.5" stroke-dasharray="3 2.5"/>
+<text x="189.9" y="897.6" text-anchor="middle" font-size="11" font-weight="700" fill="#2b2118">Kitchen Floor</text>
+<text x="189.9" y="909.6" text-anchor="middle" font-size="8" letter-spacing="1" fill="#2b2118" opacity="0.7">APPLICATION</text>
+<circle cx="132" cy="489.5" r="11" fill="#fff" fill-opacity="0.9" stroke="#f8a8c8" stroke-width="2.5" stroke-dasharray="3 2.5"/>
+<text x="132" y="513.5" text-anchor="middle" font-size="11" font-weight="700" fill="#2b2118">Order Management</text>
+<text x="132" y="525.5" text-anchor="middle" font-size="8" letter-spacing="1" fill="#2b2118" opacity="0.7">APPLICATION</text>
+<circle cx="316.4" cy="156" r="11" fill="#fff" fill-opacity="0.9" stroke="#f8a8c8" stroke-width="2.5" stroke-dasharray="3 2.5"/>
+<text x="316.4" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#2b2118">Third-Party App</text>
+<text x="316.4" y="192" text-anchor="middle" font-size="8" letter-spacing="1" fill="#2b2118" opacity="0.7">APPLICATION</text>
+<circle cx="132" cy="156" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="132" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">sticky-ae36e0a5-b01b-4bbb-ba1…</text>
+<circle cx="849.6" cy="156" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="849.6" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order cancelled</text>
+<circle cx="132" cy="695.7" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="132" y="717.7" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order accepted</text>
+<text x="132" y="728.7" text-anchor="middle" font-size="8" font-style="italic" fill="#2b2118" opacity="0.7">sollys/order/accepted/v1/{orderId}</text>
+<circle cx="184.1" cy="297.6" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="184.1" y="319.6" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order placed</text>
+<text x="184.1" y="330.6" text-anchor="middle" font-size="8" font-style="italic" fill="#2b2118" opacity="0.7">sollys/order/placed/v1/{orderId}</text>
+<circle cx="849.6" cy="873.6" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="849.6" y="895.6" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Ticket reprinted</text>
+<circle cx="718.2" cy="873.6" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="718.2" y="895.6" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order picked up</text>
+<text x="718.2" y="906.6" text-anchor="middle" font-size="8" font-style="italic" fill="#2b2118" opacity="0.7">sollys/order/picked-up/v1/{orderId}</text>
+<circle cx="736.3" cy="695.2" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="736.3" y="717.2" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order ready</text>
+<text x="736.3" y="728.2" text-anchor="middle" font-size="8" font-style="italic" fill="#2b2118" opacity="0.7">sollys/order/ready/v1/{orderId}</text>
+<circle cx="399.6" cy="873.6" r="9" fill="#ffa94d" stroke="rgba(30,20,5,0.45)" stroke-width="1.5"/>
+<text x="399.6" y="895.6" text-anchor="middle" font-size="11" font-weight="600" fill="#2b2118">Order prepared</text>
+<text x="399.6" y="906.6" text-anchor="middle" font-size="8" font-style="italic" fill="#2b2118" opacity="0.7">sollys/order/prepared/v1/{orderId}</text>
+</g>
+</svg>
