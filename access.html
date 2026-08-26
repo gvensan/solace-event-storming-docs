@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Getting in - the app, the docs, the sheets</title>
+<meta name="description" content="The access card: where the tool lives, how facilitators sign in and participants join, where the documentation is, and the four companion cheat sheets." />
+<style>
+  :root {
+    --evt: #ffa94d; --read: #9be09b; --cmd: #8ec5ff; --hot: #ff6b6b; --pol: #d0a9f5;
+    --ink: #23201a; --ink-soft: #5c554a; --wall: #f4ead8; --accent: #0a7d5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--wall); color: var(--ink); line-height: 1.45; font-size: 15px; }
+  .page { max-width: 900px; margin: 0 auto; padding: 26px 26px 30px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; border-bottom: 3px solid var(--ink); padding-bottom: 9px; }
+  h1 { font-size: 25px; letter-spacing: -0.3px; }
+  header .tag { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 2px; }
+  .intro { margin-top: 10px; font-size: 15px; }
+  .intro strong { color: var(--accent); }
+  h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 2.5px; margin: 18px 0 9px; color: var(--ink-soft); }
+  a { color: var(--accent); }
+
+  .kit { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .art { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 10px 12px; }
+  .art .ext { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; padding: 1px 7px; border-radius: 3px; margin-bottom: 4px; }
+  .art .name { display: block; font-weight: 700; font-size: 14.5px; }
+  .art .for { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.35; }
+  .art .for b { color: var(--ink); font-weight: 700; }
+  .writein { display: inline-block; min-width: 240px; border-bottom: 2px solid var(--ink); height: 1.1em; vertical-align: baseline; }
+
+  ol.first { counter-reset: n; list-style: none; }
+  ol.first li { counter-increment: n; position: relative; padding: 8px 12px 8px 44px; border: 2px solid var(--ink); border-radius: 4px; background: #fff; margin-bottom: 7px; font-size: 14px; }
+  ol.first li::before { content: counter(n); position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--wall); font-weight: 800; font-size: 12px; text-align: center; line-height: 22px; }
+  ol.first b { font-weight: 700; }
+
+  .sheets { border: 2px solid var(--ink); border-radius: 4px; background: #fff; padding: 4px 12px; }
+  .sheets p { font-size: 12.5px; padding: 5px 0; color: var(--ink-soft); }
+  .sheets p + p { border-top: 1px solid #e4dbc8; }
+  .sheets b { color: var(--ink); font-weight: 700; }
+  .sheets .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: baseline; }
+
+  .fine { border: 2px dashed var(--ink); border-radius: 4px; padding: 9px 13px; }
+  .fine p { font-size: 12.5px; margin: 2px 0; color: var(--ink-soft); }
+  .fine b { color: var(--ink); font-weight: 700; }
+
+  footer { margin-top: 14px; border-top: 3px solid var(--ink); padding-top: 8px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer p { font-size: 12px; color: var(--ink-soft); }
+
+  @media (max-width: 700px) { .kit { grid-template-columns: 1fr; } }
+  @media print {
+    body { font-size: 10.5px; line-height: 1.3; }
+    /* Full-bleed: @page margin 0 + equal inner padding (see handoff.html). */
+    html, body { background: var(--wall); }
+    .page { max-width: none; padding: 9mm; }
+    h1 { font-size: 18px; }
+    .intro { margin-top: 6px; font-size: 10.5px; }
+    h2 { margin: 9px 0 5px; font-size: 10px; }
+    .kit { gap: 7px; }
+    .art { padding: 6px 9px; }
+    .art .name { font-size: 11px; }
+    .art .for { font-size: 9.5px; }
+    ol.first li { padding: 5px 10px 5px 36px; margin-bottom: 5px; font-size: 10px; }
+    ol.first li::before { width: 17px; height: 17px; line-height: 17px; font-size: 10px; left: 9px; }
+    .sheets p { font-size: 9.5px; padding: 3px 0; }
+    .fine { padding: 5px 10px; }
+    .fine p { font-size: 9.5px; }
+    footer { margin-top: 8px; padding-top: 6px; }
+    footer p { font-size: 9.5px; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+  .docsbtn { position: fixed; top: 14px; left: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); text-decoration: none; font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .docsbtn:hover { background: var(--evt); }
+  @media print { .docsbtn { display: none; } }
+  .pdfbtn { position: fixed; top: 14px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .pdfbtn:hover { background: var(--evt); }
+  .mdbtn { position: fixed; top: 52px; right: 14px; z-index: 10; border: 2px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); font: 700 12px -apple-system, "Segoe UI", Roboto, sans-serif; padding: 6px 12px; cursor: pointer; box-shadow: 2px 2px 0 rgba(35,32,26,0.3); }
+  .mdbtn:hover { background: var(--read); }
+  @media print { .pdfbtn, .mdbtn { display: none; } }
+</style>
+<!-- ONE PAGE IS A CONTRACT (verified 2026-08-25). The docs promise every sheet
+     prints to a single A4 page. After editing, re-check:
+       node -e "const{chromium}=require('playwright');(async()=>{const b=await chromium.launch(),p=await b.newPage();await p.goto('file://'+process.argv[1]);await p.pdf({path:'/tmp/x.pdf',format:'A4',printBackground:true});const n=(require('fs').readFileSync('/tmp/x.pdf').toString('latin1').match(/\/Type\s*\/Page[^s]/g)||[]).length;console.log(n);await b.close()})()" <abs-path>
+     Spacing lives in the @media print block - tighten there, never below ~8.5px type. -->
+</head>
+<body>
+<a class="docsbtn" href="./" title="back to the documentation home">← docs</a>
+<button class="pdfbtn" onclick="window.print()" title="opens your browser's print dialog - choose 'Save as PDF' as the destination">⬇ Save as PDF</button>
+<button class="mdbtn" onclick="downloadMarkdown()" title="downloads this card as a Markdown file - paste it into a wiki, an email, or a chat">⬇ Markdown</button>
+<script>
+  // The same card as portable Markdown: for wikis, invitation emails, chat.
+  function downloadMarkdown() {
+    var md = [
+      '# Getting in: the app, the docs, the sheets',
+      '',
+      '_Event Storming Workshop Tool - access card_',
+      '',
+      '## The application',
+      '',
+      '- **App address:** _(your facilitator shares the link - or an invite link that opens the board directly)_',
+      '- **Facilitators:** register your own account on the facilitator screen - any username (3+ characters) and password (8+ characters). No shared credentials.',
+      '- **Participants:** no account needed. Join through the invite link with just a display name; the link sets your role - participant (edit, vote, chat) or observer (read-only).',
+      '- **Browser:** desktop or laptop, window at least 1024px wide. Not built for phones or tablets.',
+      '',
+      '## First five minutes',
+      '',
+      '1. Open the app address and **register**, then sign in.',
+      "2. Open the **Samples** tab and click **Solly's Coffee** - you get your own complete copy of a finished workshop to explore safely.",
+      '3. You land on the **big-picture map**. The pills under the toolbar are the use-case boards - click one to drill in.',
+      '4. Ready for real work? **New workshop** starts a blank one - every workshop opens on its map.',
+      '',
+      '## The documentation',
+      '',
+      'Docs site: https://gvensan.github.io/solace-event-storming-docs/',
+      '',
+      '- **Concepts** - what event storming is, the sticky grammar, how a workshop is shaped, the phases',
+      '- **Participant guide** - joining, working on the board, voting, chat',
+      '- **Facilitator guides** - running a workshop, the phase playbook, every mechanic (map, boundaries, review, exports)',
+      '- **Solace layer** - topics, contexts, and how the wall becomes an Event Portal model',
+      '',
+      '## Printable cheat sheets (each prints to one A4 page)',
+      '',
+      '- **Participant primer** - https://gvensan.github.io/solace-event-storming-docs/cheatsheet.html - read before you walk in: the colors, the gestures, the arc of the day.',
+      '- **Facilitator field card** - https://gvensan.github.io/solace-event-storming-docs/facilitator-card.html - phases, gates, and controls at a glance while you run the room.',
+      '- **Wall to Event Portal map** - https://gvensan.github.io/solace-event-storming-docs/epmap.html - how stickies translate to domains, applications, events, and topics.',
+      '- **Handoff kit** - https://gvensan.github.io/solace-event-storming-docs/handoff.html - what a finished session produces and what to do with it first.',
+      '',
+      '## Good to know',
+      '',
+      '- The wall is event-sourced: every change is kept, undo is safe, and the whole session can be replayed.',
+      '- Views are personal lenses (plain, actor, system, context) - switching yours moves nothing for anyone else.',
+      '- Deliverables live in the export menu: the workbook, board pictures, and the Event Portal import file.',
+      '',
+      '_Event Storming Workshop Tool - internal, operated by Solace. Questions: your workshop facilitator._',
+      ''
+    ].join('\n');
+    var blob = new Blob([md], { type: 'text/markdown' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'event-storming-access-card.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+</script>
+<div class="page">
+
+  <header>
+    <h1>Getting in: the app, the docs, the sheets</h1>
+    <span class="tag">access card - share before the session</span>
+  </header>
+
+  <p class="intro">
+    Everything you need to <strong>open the tool</strong>, learn the method, and print
+    the companion one-pagers. Facilitators: fill in the app address below before you
+    send this out.
+  </p>
+
+  <h2>The application</h2>
+  <div class="kit">
+    <div class="art">
+      <span class="ext" style="background: var(--evt)">WHERE</span>
+      <span class="name">App address: <span class="writein" aria-label="write the app URL here"></span></span>
+      <p class="for">Your facilitator shares the link - or the <b>invite link</b>, which
+      opens the right board directly. Write it in before printing or mailing this card.</p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--cmd)">FACILITATORS</span>
+      <span class="name">Register your own account</span>
+      <p class="for">On the facilitator screen, pick <b>Register</b>: any username
+      (3+ characters) and password (8+ characters). <b>No shared credentials.</b></p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--read)">PARTICIPANTS</span>
+      <span class="name">No account - just the invite link</span>
+      <p class="for">Join with a display name. The link itself sets your role:
+      <b>participant</b> (edit, vote, chat) or <b>observer</b> (read-only, watch and read).</p>
+    </div>
+    <div class="art">
+      <span class="ext" style="background: var(--pol)">BROWSER</span>
+      <span class="name">Desktop or laptop</span>
+      <p class="for">A window at least <b>1024px wide</b>. The board is not built for
+      phones or tablets - chat and reading work, the wall does not.</p>
+    </div>
+  </div>
+
+  <h2>First five minutes</h2>
+  <ol class="first">
+    <li>Open the app address and <b>register</b>, then sign in.</li>
+    <li>Open the <b>Samples</b> tab and click <b>Solly's Coffee</b> - you get your own complete copy of a finished workshop to explore safely.</li>
+    <li>You land on the <b>big-picture map</b>. The pills under the toolbar are the use-case boards - click one to drill in.</li>
+    <li>Ready for real work? <b>New workshop</b> starts a blank one - every workshop opens on its map.</li>
+  </ol>
+
+  <h2>The documentation <span style="text-transform:none;letter-spacing:0;font-size:11px">- <a href="./">this site's home</a></span></h2>
+  <div class="kit">
+    <div class="art">
+      <p class="for"><b>Concepts</b> - what event storming is, the sticky grammar, how a
+      workshop is shaped, the phases.<br /><b>Participant guide</b> - joining, working on
+      the board, voting, chat.</p>
+    </div>
+    <div class="art">
+      <p class="for"><b>Facilitator guides</b> - running a workshop, the phase playbook,
+      every mechanic (map, boundaries, review, exports).<br /><b>Solace layer</b> - topics,
+      contexts, and how the wall becomes an Event Portal model.</p>
+    </div>
+  </div>
+
+  <h2>The other four sheets - each prints to one A4 page</h2>
+  <div class="sheets">
+    <p><span class="dot" style="background: var(--evt)"></span><b>Participant primer</b> · <a href="./cheatsheet.html">cheatsheet.html</a> - read before you walk in: the colors, the gestures, the arc of the day.</p>
+    <p><span class="dot" style="background: #ffe066"></span><b>Facilitator field card</b> · <a href="./facilitator-card.html">facilitator-card.html</a> - phases, gates, and controls at a glance while you run the room.</p>
+    <p><span class="dot" style="background: var(--cmd)"></span><b>Wall → Event Portal map</b> · <a href="./epmap.html">epmap.html</a> - how stickies translate to domains, applications, events, and topics.</p>
+    <p><span class="dot" style="background: var(--read)"></span><b>Handoff kit</b> · <a href="./handoff.html">handoff.html</a> - what a finished session produces and what to do with it first.</p>
+  </div>
+
+  <h2>Good to know</h2>
+  <div class="fine">
+    <p><b>The wall is event-sourced:</b> every change is kept, undo is safe, and the whole session can be replayed.</p>
+    <p><b>Views are personal lenses:</b> plain, actor, system, context - switching yours moves nothing for anyone else.</p>
+    <p><b>Deliverables live in the export menu:</b> the workbook, board pictures, and the Event Portal import file.</p>
+  </div>
+
+  <footer>
+    <p>Event Storming Workshop Tool - internal, operated by Solace</p>
+    <p>Questions: your workshop facilitator</p>
+  </footer>
+
+</div>
+</body>
+</html>
